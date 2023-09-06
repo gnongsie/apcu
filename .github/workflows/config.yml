@@ -1,6 +1,14 @@
 name: Build and Test
 on: [push, pull_request, workflow_dispatch]
 jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: tgymnich/fork-sync@v1.2.1
+        with:
+           owner: krakjoe
+           base: master
+           head: master
   ubuntu:
     strategy:
       matrix:
