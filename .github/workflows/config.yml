@@ -6,11 +6,12 @@ jobs:
     steps:
       - uses: tgymnich/fork-sync@v1.2.1
         with:
-           token: ${{ secrets.PERSONAL_TOKEN }} 
+           github_token: ${{ secrets.PERSONAL_TOKEN }} 
            owner: krakjoe
            base: master
            head: master
   ubuntu:
+    needs: sync
     strategy:
       matrix:
           version: ["7.0", "7.1", "7.2", "7.3", "7.4", "8.0", "8.1", "8.2"]
@@ -35,6 +36,7 @@ jobs:
             make test TESTS="--show-diff -d apc.serializer=default -d opcache.enable_cli=1 tests"
             make test TESTS="--show-diff -d apc.serializer=php -d opcache.enable_cli=1 tests"
   windows:
+    needs: sync
     defaults:
       run:
         shell: cmd
