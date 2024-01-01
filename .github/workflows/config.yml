@@ -19,11 +19,11 @@ jobs:
     needs: sync
     strategy:
       matrix:
-          version: ["7.0", "7.1", "7.2", "7.3", "7.4", "8.0", "8.1", "8.2"]
+          version: ["7.0", "7.1", "7.2", "7.3", "7.4", "8.0", "8.1", "8.2", "8.3"]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout apcu
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -47,16 +47,16 @@ jobs:
         shell: cmd
     strategy:
       matrix:
-          version: ["7.2", "7.3", "7.4", "8.0", "8.1", "8.2"]
+          version: ["7.2", "7.3", "7.4", "8.0", "8.1", "8.2", "8.3"]
           arch: [x64]
           ts: [nts, ts]
     runs-on: windows-latest
     steps:
       - name: Checkout apcu
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Setup PHP
         id: setup-php
-        uses: cmb69/setup-php-sdk@v0.6
+        uses: php/setup-php-sdk@v0.8
         with:
           version: ${{matrix.version}}
           arch: ${{matrix.arch}}
